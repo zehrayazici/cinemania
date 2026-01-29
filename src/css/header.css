@@ -1,44 +1,167 @@
-.header {
-  padding: 20px 0;
+/* 1. DEĞİŞKENLER (En Üstte Olmalı) */
+:root {
+  --primary-orange: #f87719;
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1); /* 250s hatası 250ms olarak düzeltildi */
 }
+
+/* Dark Theme (Varsayılan) */
+body.dark-theme {
+  --header-bg: transparent;
+  --text-color: #ffffff;
+  --nav-link-color: #b7b7b7;
+}
+
+/* Light Theme */
+body.light-theme {
+  --header-bg: #ffffff;
+  --text-color: #111111;
+  --nav-link-color: #555555;
+}
+
+/* 2. TEMEL HEADER YAPISI (Mobile-First) */
+.header {
+  padding: 12px 0;
+  background-color: var(--header-bg);
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  transition: background-color var(--transition);
+}
+
+.header-container { /* İsim çakışmaması için container yerine header-container tercih edilebilir */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 .nav {
   display: flex;
+  align-items: center;
+  width: 100%;
   justify-content: space-between;
 }
+
 .nav-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.nav-list {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 40px;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: color var(--transition);
 }
-.nav-link {
-  position: relative;
-  display: block;
+
+.logo-text {
   font-weight: 500;
-  letter-spacing: 0.02em;
-  transition: 200ms ease-in;
+  font-size: 18px;
+  text-transform: uppercase;
 }
-.nav-link:hover,
-.nav-link:focus {
-  color: #747bff;
+
+/* Mobilde Navigasyon Gizli (Figma'ya uygun) */
+.nav-list {
+  display: none;
 }
-.nav-link::after {
-  content: '';
+
+/* 3. TEMA SWITCH (TOGGLE) TASARIMI */
+.theme-dark-light {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(100%);
-  width: 110%;
-  height: 4px;
-  border-radius: 4px;
-  transform-origin: center;
-  animation: stretch 400ms cubic-bezier(0.68, -0.55, 0.27, 1.55) 200ms both;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, #4b4b4b 0%, #2e2e2e 100%);
+  border-radius: 20px;
+  transition: var(--transition);
 }
-.nav-link.active::after {
-  background: #747bff;
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+input:checked + .slider {
+  background: var(--primary-orange);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* 4. MOBİL MENÜ BUTONU */
+.mobile-menu-toggle {
+  background: none;
+  border: none;
+  color: var(--primary-orange);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* 5. TABLET VE DESKTOP (768px+) */
+@media screen and (min-width: 768px) {
+  .nav-list {
+    display: flex;
+    gap: 32px;
+    margin-left: auto;
+    margin-right: 40px;
+    list-style: none;
+  }
+
+  .nav-link {
+    color: var(--nav-link-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color var(--transition);
+    position: relative;
+    padding: 5px 0;
+  }
+
+  /* Hover ve Active Renkleri (Eski morlar temizlendi) */
+  .nav-link:hover,
+  .nav-link:focus,
+  .nav-link.active {
+    color: var(--primary-orange);
+  }
+
+  /* Alt Çizgi Efekti (İsteğe bağlı, Figma'da turuncu vurgu için) */
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-orange);
+    border-radius: 2px;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+  }
 }
