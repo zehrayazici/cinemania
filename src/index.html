@@ -3,32 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cinemania Movie Project</title>
+
+    <title>Cinemania</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <!-- Normalize / reset varsa -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
-    />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
   </head>
 
   <body>
-    <!-- HEADER -->
-    <div id="header"></div>
+    <!-- HEADER (senin modülün) -->
+    <include src="./partials/header.html"></include>
 
-    <!-- HERO + CONTENT -->
-    <main id="main-content"></main>
+    <!-- HERO (başka arkadaş ekleyecek) -->
+    <!-- <include src="./partials/hero.html"></include> -->
 
-    <!-- FOOTER -->
-    <div id="footer"></div>
+    <!-- CATALOG (başka arkadaş ekleyecek) -->
+    <!-- <include src="./partials/catalog.html"></include> -->
 
-    <!-- SCROLL TO TOP -->
-    <button class="scroll-up-btn" id="scrollUpBtn">▲</button>
+    <!-- FOOTER (başka arkadaş ekleyecek) -->
+    <!-- <include src="./partials/footer.html"></include> -->
 
-    <!-- MAIN SCRIPT (tek giriş noktası) -->
+    <!-- MAIN JS (TEK SCRIPT) -->
     <script type="module" src="./main.js"></script>
   </body>
 </html>
