@@ -1,6 +1,7 @@
 // Modüller
 import { BASE_URL, API_KEY } from './api/movies-api.js';
-import { showMovieDetailsModal, showTrailerModal } from './modal.js';
+import { openMoviePopup } from './pop-up-movie-card.js';
+import { openTrailerPopup } from './pop-up-trailer-card.js';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
 const FALLBACK_IMAGE = '../img/library-hero-image.jpg';
@@ -25,7 +26,7 @@ async function initializeMyLibraryHero() {
 // LocalStorage
 function getUserMoviesFromLocalStorage() {
   try {
-    const savedMovies = localStorage.getItem('userMovies');
+    const savedMovies = localStorage.getItem('my-library');
     return savedMovies ? JSON.parse(savedMovies) : null;
   } catch (error) {
     console.error('Error reading from localStorage:', error);
@@ -96,7 +97,7 @@ function displayMyLibraryHero(movie) {
 
   myLibraryHeroOverlay.innerHTML = `
     <h1 class="my-library-hero__title">${movie.title}</h1>
-    <div class="my-library-hero__rating">${starRating}</div>
+    ${starRating ? `<div class="my-library-hero__rating">${starRating}</div>` : ''}
     <p class="my-library-hero__description">${overview}</p>
     <div class="my-library-hero__buttons">
       <button class="my-library-hero__btn my-library-hero__btn--trailer" id="my-library-hero-trailer-btn">
@@ -129,10 +130,10 @@ async function handleShowMovieDetails(movieId) {
       `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en`
     );
 
-    if (!response.ok) throw new Error(response.status);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const movie = await response.json();
-    showMovieDetailsModal(movie);
+    openMoviePopup(movie);
   } catch (error) {
     console.error('Error loading movie details:', error);
     alert('Failed to load movie details. Please try again.');
@@ -146,7 +147,7 @@ async function handleShowTrailer(movieId) {
       `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en`
     );
 
-    if (!response.ok) throw new Error(response.status);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const data = await response.json();
 
@@ -154,9 +155,11 @@ async function handleShowTrailer(movieId) {
       video => video.type === 'Trailer' && video.site === 'YouTube'
     );
 
-    trailer
-      ? showTrailerModal(trailer.key)
-      : alert('Trailer not found for this movie!');
+    if (trailer) {
+      openTrailerPopup(trailer.key);
+    } else {
+      alert('Trailer not found for this movie!');
+    }
   } catch (error) {
     console.error('Error loading trailer:', error);
     alert('Failed to load trailer. Please try again.');
@@ -185,3 +188,6 @@ function displayDefaultMyLibraryHero() {
 
 // Başlat
 document.addEventListener('DOMContentLoaded', initializeMyLibraryHero);
+
+// Export
+export { initializeMyLibraryHero };
