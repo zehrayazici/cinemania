@@ -1,78 +1,81 @@
-export function initHeader() {
-  // ACTIVE LINKS
-  const setActive = (selector) => {
-    const links = document.querySelectorAll(selector);
-    const currentPath = window.location.pathname;
+const THEME_KEY = 'cinemania-theme';
+const THEME_DARK = 'dark';
+const THEME_LIGHT = 'light';
 
-    links.forEach((link) => {
-      try {
-        const linkPath = new URL(link.href).pathname;
-        link.classList.toggle('active', linkPath === currentPath);
-      } catch {}
-    });
-  };
+function applyTheme(theme) {
+  const body = document.body;
 
-  setActive('.header__link');
-  setActive('.mobile-menu__link');
+  // always keep exactly one
+  body.classList.remove('dark-theme', 'light-theme');
 
-  // MOBILE MENU
-  const menuBtn = document.getElementById('burger-btn');
-  const backdrop = document.getElementById('mobile-menu-backdrop');
-  const menu = document.getElementById('mobile-menu');
-
-  const openMenu = () => {
-    backdrop.classList.remove('is-hidden');
-    menu.classList.remove('is-hidden');
-    requestAnimationFrame(() => {
-      menu.style.transform = 'translateX(0)';
-    });
-  };
-
-  const closeMenu = () => {
-    menu.style.transform = 'translateX(-105%)';
-    setTimeout(() => {
-      backdrop.classList.add('is-hidden');
-      menu.classList.add('is-hidden');
-    }, 250);
-  };
-
-  if (menuBtn && backdrop && menu) {
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openMenu();
-    });
-
-    backdrop.addEventListener('click', closeMenu);
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    menu.addEventListener('click', (e) => {
-      if (e.target.matches('a')) closeMenu();
-    });
+  if (theme === THEME_LIGHT) {
+    body.classList.add('light-theme');
+  } else {
+    body.classList.add('dark-theme');
   }
+}
 
+function getSavedTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  return saved === THEME_LIGHT ? THEME_LIGHT : THEME_DARK; // default dark
+}
 
- // ---------- THEME (default: dark) ----------
-const switcher = document.getElementById('theme-switcher');
-const KEY = 'cinemania-theme';
+function saveTheme(theme) {
+  localStorage.setItem(THEME_KEY, theme);
+}
 
-const applyTheme = (mode) => {
-  // mode: 'dark' | 'light'
-  document.body.classList.toggle('light-theme', mode === 'light');
-  document.body.classList.toggle('dark-theme', mode !== 'light');
-};
+function initThemeToggle() {
+  const toggleBtn = document.querySelector('.theme-toggle');
+  if (!toggleBtn) return;
 
-// sayfa açılır açılmaz uygula (yoksa dark)
-applyTheme(localStorage.getItem(KEY) || 'dark');
+  // apply on load
+  applyTheme(getSavedTheme());
 
-if (switcher) {
-  switcher.addEventListener('click', () => {
-    const isLight = document.body.classList.contains('light-theme');
-    const next = isLight ? 'dark' : 'light';
-    localStorage.setItem(KEY, next);
+  toggleBtn.addEventListener('click', () => {
+    const current = document.body.classList.contains('light-theme') ? THEME_LIGHT : THEME_DARK;
+    const next = current === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
+
     applyTheme(next);
+    saveTheme(next);
   });
 }
+
+function initMobileMenu() {
+  const burgerBtn = document.querySelector('.burger-btn');
+  const menuOverlay = document.querySelector('[data-menu]');
+
+  if (!burgerBtn || !menuOverlay) return;
+
+  const openMenu = () => menuOverlay.classList.remove('is-hidden');
+  const closeMenu = () => menuOverlay.classList.add('is-hidden');
+
+  burgerBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // toggle
+    if (menuOverlay.classList.contains('is-hidden')) openMenu();
+    else closeMenu();
+  });
+
+  // close when clicking outside panel
+  menuOverlay.addEventListener('click', (e) => {
+    if (e.target === menuOverlay) closeMenu();
+  });
+
+  // close when clicking link
+  menuOverlay.addEventListener('click', (e) => {
+    const link = e.target.closest('.mobile-menu-link');
+    if (link) closeMenu();
+  });
+
+  // close on Esc
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+}
+
+export function initHeader() {
+  initThemeToggle();
+  initMobileMenu();
 }

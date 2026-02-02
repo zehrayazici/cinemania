@@ -1,228 +1,335 @@
-/* ================================
-   HEADER – FIGMA UYUMLU (HEX)
-   Default: DARK
-================================ */
+/* =========================
+   BASE
+========================= */
+:root {
+  --toggle-shift: 26px; /* dot sağa kayma miktarı */
+}
 
-/* THEME VARS */
+body {
+  margin: 0;
+}
+
+/* =========================
+   THEME VARIABLES (default dark)
+========================= */
 body.dark-theme {
-  --header-bg: transparent;
-  --text-color: #ffffff;
-  --nav-link-color: #b7b7b7;
-  --menu-bg: #171717;
+  --header-text: #ffffff;
+  --muted-text: #b7b7b7;
+  --panel-bg: #171717;
+  --track-bg: #595959;
+  background-color: #111111;
+  color: #ffffff;
 }
 
 body.light-theme {
-  --header-bg: #ffffff;
-  --text-color: #111111;
-  --nav-link-color: #595959;
-  --menu-bg: #ffffff;
+  --header-text: #111111;
+  --muted-text: #595959;
+  --panel-bg: #ffffff;
+  --track-bg: #d9d9d9;
+  background-color: #ffffff;
+  color: #111111;
 }
 
-/* BASE */
+/* Header içinde default text rengi */
+.header,
+.header a,
+.header button,
+.header p,
+.header span {
+  color: var(--header-text);
+}
+
+/* =========================
+   HEADER LAYOUT
+========================= */
 .header {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--header-bg);
   z-index: 100;
 }
 
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.header__container {
-  height: 48px; /* mobile */
+.header-container {
+  height: 60px;
+  padding: 12px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  background: transparent;
 }
 
-/* LOGO */
-.header__logo {
+/* =========================
+   LEFT
+========================= */
+.header-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  text-decoration: none;
+  gap: 12px;
 }
 
-.header__logo-icon {
+.burger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header-popcorn-icon {
   width: 32px;
   height: 32px;
   display: block;
 }
 
-.header__logo-text {
-  display: none; /* mobile hidden */
-  font-family: Roboto, sans-serif;
+/* desktop/tablet logo link */
+.header-logo-link {
+  display: none; /* hidden on mobile */
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.header-logo-text {
   font-weight: 500;
-  font-size: 24px;
-  color: var(--text-color);
+  font-size: 14px;
+  line-height: 1;
 }
 
-/* NAV (tablet/desktop visible) */
-.header__nav {
-  display: none;
-}
-
-.header__nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* =========================
+   CENTER
+========================= */
+.header-center {
+  flex: 1;
   display: flex;
-  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-mobile-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #b7b7b7;
   align-items: center;
 }
 
-.header__link {
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--nav-link-color);
-  transition: color 0.3s ease;
+.header-nav {
+  display: none; /* hidden on mobile */
 }
 
-.header__link:hover,
-.header__link.active {
+.header-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* =========================
+   NAV LINKS (desktop)
+   - default: #b7b7b7
+   - hover: orange
+   - active: orange
+========================= */
+.header-nav-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  color: #b7b7b7;
+  transition: color 250ms ease;
+}
+
+.header-nav-link:hover,
+.header-nav-link:focus {
   color: #f87719;
 }
 
-/* MENU BUTTON (mobile only) */
-.header__menu-btn {
-  border: none;
-  background: transparent;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-  text-transform: uppercase;
-  color: var(--nav-link-color);
-  cursor: pointer;
+.header-nav-link.active {
+  color: #f87719;
 }
 
-/* THEME SWITCHER */
-.theme-switcher {
+/* =========================
+   RIGHT / THEME TOGGLE
+========================= */
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.theme-toggle {
   position: relative;
   width: 44px;
   height: 18px;
-  padding: 2px;
-  border: none;
-  border-radius: 50px;
-  background: linear-gradient(180deg, #f87719 0%, #f84119 100%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
 }
 
-.theme-switcher__icons {
-  width: 100%;
-  height: 100%;
+.theme-toggle-track {
+  width: 44px;
+  height: 18px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 194px;
   padding: 2px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, #f84119 0%, #ffc226 100%);
 }
 
-.theme-switcher__moon,
-.theme-switcher__sun {
+/* track içindeki ikonlar */
+.theme-toggle-icon {
   width: 10px;
   height: 10px;
   display: block;
 }
 
-.theme-switcher__dot {
+.theme-toggle-icon.moon {
+  margin-left: 2px;
+}
+
+.theme-toggle-icon.sun {
+  margin-right: 2px;
+}
+
+/* kayan nokta */
+.theme-toggle-dot {
   position: absolute;
+  top: 50%;
   left: 2px;
-  top: 2px;
   width: 14px;
   height: 14px;
-  transform: translateX(0);
-  transition: transform 0.35s ease;
+  background: #ffffff;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  transition: transform 250ms ease;
 }
 
-body.light-theme .theme-switcher__dot {
-  transform: translateX(25px);
+/* DARK: dot sağda */
+body.dark-theme .theme-toggle-dot {
+  transform: translate(var(--toggle-shift), -50%);
 }
 
-/* MOBILE MENU */
-.is-hidden {
+/* LIGHT: dot solda */
+body.light-theme .theme-toggle-dot {
+  transform: translate(0px, -50%);
+}
+
+.theme-toggle-dot-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.mobile-menu.is-hidden {
   display: none;
 }
 
-.mobile-menu-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.2);
-  z-index: 999;
+.mobile-menu-panel {
+  width: 204px;
+  height: 428px;
+  background: var(--panel-bg);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 40px 24px;
 }
 
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 65%;
-  max-width: 260px;
-  height: 100%;
-  background-color: var(--menu-bg);
-  z-index: 1000;
-  padding: 60px 20px 20px;
-}
-
-body.dark-theme .mobile-menu {
-  background-color: #171717;
-}
-
-.mobile-menu__list {
+.mobile-menu-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  gap: 24px;
 }
 
-.mobile-menu__link {
-  font-family: Roboto, sans-serif;
+.mobile-menu-link {
+  text-decoration: none;
+  text-transform: uppercase;
   font-weight: 500;
   font-size: 14px;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--nav-link-color);
+  color: var(--header-text);
 }
 
-.mobile-menu__link.active,
-.mobile-menu__link:hover {
+.mobile-menu-link:hover,
+.mobile-menu-link:focus {
   color: #f87719;
 }
 
-/* TABLET */
+/* =========================
+   TABLET/DESKTOP
+========================= */
 @media (min-width: 768px) {
-  .header__container {
-    height: 60px;
+  .burger-btn {
+    display: none;
   }
 
-  .header__logo-text {
-    display: inline;
+  .header-logo-link {
+    display: inline-flex;
   }
 
-  .header__nav {
+  .header-mobile-title {
+    display: none;
+    color: var(--muted-text);
+  }
+
+  .header-nav {
     display: block;
   }
-
-  .header__menu-btn {
-    display: none; /* tablet+ MENU yazısı yok */
-  }
+}
+/* === NAV COLOR FORCE PATCH === */
+.header .header-nav a,
+.header .header-nav .header-nav-link,
+.header .header-nav .header-nav-link {
+  color: var(--muted-text);
+  transition: color 250ms ease;
+  text-transform: uppercase;
 }
 
-/* DESKTOP */
-@media (min-width: 1280px) {
-  .container {
-    padding: 0 32px; /* figma padding */
-  }
+/* hover */
+.header .header-nav a:hover,
+.header .header-nav a:focus,
+.header .header-nav .header-nav-link:hover,
+.header .header-nav .header-nav-link:focus,
+.header .header-nav .header-nav-link:hover,
+.header .header-nav .header-nav-link:focus {
+  color: #f87719;
+}
+
+/* active */
+.header .header-nav a.active,
+.header .header-nav .header-nav-link.active,
+.header .header-nav .header-nav-link.active {
+  color: #f87719;
+}
+/* NAV FINAL */
+.header .header-nav-link {
+  color: var(--muted-text);
+  transition: color 250ms ease;
+}
+
+.header .header-nav-link:hover,
+.header .header-nav-link:focus,
+.header .header-nav-link.active {
+  color: #f87719;
 }
