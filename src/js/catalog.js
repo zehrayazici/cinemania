@@ -53,7 +53,7 @@ export function initCatalog() {
   if (!parent) return;
 
   const clearInputBtn = parent.querySelector('.search-clear-btn');
-  if (clearInputBtn) clearInputBtn.style.display = 'block';
+  if (clearInputBtn) clearInputBtn.style.display = 'none';
 
   // clearBtn id ile bulunamazsa class'tan yakala (HTML'e dokunmadan)
   const clearBtnSafe = clearBtn || clearInputBtn;
