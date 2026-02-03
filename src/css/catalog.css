@@ -44,7 +44,7 @@
 
 .year-select {
     position: relative;
-    background: #111;
+    background: transparent;
     width: 95px;
 }
 
@@ -249,8 +249,8 @@
 
 .movie-rating-stars {
     position: absolute;
-    right: 12px;
-    bottom: 17px;
+    right: 54px;
+    bottom: 18px;
     display: flex;
     flex-direction: row;
     gap: 0;
