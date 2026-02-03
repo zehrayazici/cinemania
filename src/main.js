@@ -8,20 +8,18 @@ import { startHeroApp } from './js/hero.js';
 import { initMyLibrary } from './js/my-library.js';
 import { initializeMyLibraryHero } from './js/my-library-hero.js';
 
-
-// my library hero sadece library page de yüklenecek
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   
-  // sayfa kontrolü
+  // Sayfa kontrolü
   const isLibraryPage = document.querySelector('.library-section') !== null;
   
   if (isLibraryPage) {
-    // eğer My Library 
+    // My Library sayfasındayız
     initializeMyLibraryHero();
     initMyLibrary();
   } else {
-    // diğer sayfalar 
+    // Ana sayfadayız
     initCatalog();
     startHeroApp();
   }
