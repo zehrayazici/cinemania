@@ -13,37 +13,49 @@ const descriptionEl = document.querySelector('.popup-movie-description');
 const LIBRARY_KEY = 'my-library';
 
 async function openMoviePopup(movieId) {
+  if (!overlay || !loader) return;
+
   overlay.classList.add('is-active');
   loader.classList.remove('is-hidden');
 
   try {
     const movie = await getMovieDetails(movieId);
 
-    posterImg.src = movie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-      : '';
+    if (posterImg) {
+      posterImg.src = movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : '';
+    }
 
-    titleEl.textContent = movie.title || 'Unknown title';
+    if (titleEl) {
+      titleEl.textContent = movie.title || 'Unknown title';
+    }
 
-    infoValues[0].textContent = movie.vote_average
-      ? `${movie.vote_average} / ${movie.vote_count}`
-      : 'N/A';
+    if (infoValues.length >= 3) {
+      infoValues[0].textContent = movie.vote_average
+        ? `${movie.vote_average} / ${movie.vote_count}`
+        : 'N/A';
 
-    infoValues[1].textContent = movie.popularity
-      ? movie.popularity.toFixed(1)
-      : 'N/A';
+      infoValues[1].textContent = movie.popularity
+        ? movie.popularity.toFixed(1)
+        : 'N/A';
 
-    infoValues[2].textContent = movie.genres?.length
-      ? movie.genres.map(g => g.name).join(', ')
-      : 'Unknown';
+      infoValues[2].textContent = movie.genres?.length
+        ? movie.genres.map(g => g.name).join(', ')
+        : 'Unknown';
+    }
 
-    descriptionEl.textContent = movie.overview || 'No description available.';
+    if (descriptionEl) {
+      descriptionEl.textContent = movie.overview || 'No description available.';
+    }
 
-    libraryBtn.textContent = isInLibrary(movie.id)
-      ? 'Remove from My Library'
-      : 'Add to My Library';
+    if (libraryBtn) {
+      libraryBtn.textContent = isInLibrary(movie.id)
+        ? 'Remove from My Library'
+        : 'Add to My Library';
 
-    libraryBtn.onclick = () => toggleLibrary(movie);
+      libraryBtn.onclick = () => toggleLibrary(movie);
+    }
   } catch (error) {
     console.error('Movie details error:', error);
   } finally {
@@ -52,7 +64,7 @@ async function openMoviePopup(movieId) {
 }
 
 function closeMoviePopup() {
-  overlay.classList.remove('is-active');
+  if (overlay) overlay.classList.remove('is-active');
 }
 
 function getLibrary() {
@@ -64,6 +76,8 @@ function isInLibrary(id) {
 }
 
 function toggleLibrary(movie) {
+  if (!libraryBtn) return;
+
   let library = getLibrary();
 
   if (isInLibrary(movie.id)) {
@@ -77,11 +91,15 @@ function toggleLibrary(movie) {
   localStorage.setItem(LIBRARY_KEY, JSON.stringify(library));
 }
 
-closeBtn.addEventListener('click', closeMoviePopup);
+if (closeBtn) {
+  closeBtn.addEventListener('click', closeMoviePopup);
+}
 
-overlay.addEventListener('click', e => {
-  if (e.target === overlay) closeMoviePopup();
-});
+if (overlay) {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeMoviePopup();
+  });
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeMoviePopup();
