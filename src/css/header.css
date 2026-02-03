@@ -43,11 +43,10 @@ body.light-theme {
    HEADER LAYOUT
 ========================= */
 .header {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   z-index: 100;
+  background-color: var(--panel-bg);
 }
 
 .header-container {
