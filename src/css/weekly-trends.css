@@ -1,9 +1,8 @@
 /* Ana konteyner: Body stillerini buraya çektik */
 .weekly-trends {
-    margin-top: 80px;
     background-color: #000;
     color: #fff;
-    font-family: 'Arial', sans-serif;
+    font-family: Roboto, sans-serif;
     padding: 20px 0;
 }
 
