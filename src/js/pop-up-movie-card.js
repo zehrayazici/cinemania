@@ -121,4 +121,9 @@ function toggleLibrary(movie) {
 
 document.addEventListener('DOMContentLoaded', initPopup);
 
-export { openMoviePopup };
+// Expose for catalog.js safe hook
+if (typeof window !== 'undefined') {
+  window.openMoviePopup = openMoviePopup;
+}
+
+export { openMoviePopup, openMoviePopup as renderMoviePopup };

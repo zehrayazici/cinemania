@@ -20,7 +20,7 @@
 }
 
 .popup-movie-modal {
-  background: #ffffff;
+  background: #f7f7f7;
   width: 100%;
   max-width: 420px;
   border-radius: 16px;
@@ -37,6 +37,7 @@
   background: transparent;
   border: none;
   font-size: 20px;
+  color: #1a1a1a;
   cursor: pointer;
 }
 
@@ -50,6 +51,7 @@
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 16px;
+  color: #111111;
 }
 
 .popup-movie-info {
@@ -65,25 +67,50 @@
 }
 
 .popup-movie-info .popup-label {
-  color: #111111;
+  color: #6e6e6e;
 }
 
 .popup-movie-info .popup-value {
   font-weight: 500;
   text-align: right;
+  color: #111111;
 }
 
 .popup-about-title {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
+  color: #111111;
 }
 
 .popup-movie-description {
   font-size: 13px;
   line-height: 1.5;
-  color: #111111;
+  color: #444444;
   margin-bottom: 20px;
+}
+
+/* Dark theme override */
+body.dark-theme .popup-movie-modal {
+  background: #1a1a1a;
+}
+
+body.dark-theme .popup-modal-close {
+  color: #f8f8f8;
+}
+
+body.dark-theme .popup-movie-title,
+body.dark-theme .popup-movie-info .popup-value,
+body.dark-theme .popup-about-title {
+  color: #f8f8f8;
+}
+
+body.dark-theme .popup-movie-info .popup-label {
+  color: #b7b7b7;
+}
+
+body.dark-theme .popup-movie-description {
+  color: #e0e0e0;
 }
 
 .popup-add-library-btn {
