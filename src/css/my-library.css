@@ -12,13 +12,13 @@
 
 /* Açık tema için kullanılan renk ve gölge değişkenleri */
 :root {
-  --bg-genre: #fff;              /* Genre dropdown arka planı */
-  --text-genre: #282828;         /* Genre metin rengi */
-  --border-genre: #595959;       /* Genre border rengi */
-  --border-bttm: #595959;        /* Genre list item alt çizgisi */
-  --bg-body: #FFFFFF;            /* Sayfa arka plan rengi */
-  --bg-hover: #f5f5f5;           /* Hover arka plan rengi */
-  --genre-active: #F87719;       /* Aktif genre rengi */
+  --bg-genre: #fff; /* Genre dropdown arka planı */
+  --text-genre: #282828; /* Genre metin rengi */
+  --border-genre: #595959; /* Genre border rengi */
+  --border-bttm: #595959; /* Genre list item alt çizgisi */
+  --bg-body: #ffffff; /* Sayfa arka plan rengi */
+  --bg-hover: #f5f5f5; /* Hover arka plan rengi */
+  --genre-active: #f87719; /* Aktif genre rengi */
   --shadow: 0 6px 16px rgba(0, 0, 0, 0.6); /* Kart hover gölgesi */
   --empty-title: #111111;
 }
@@ -27,13 +27,13 @@
 
 /* Dark theme aktif olduğunda değişen değişkenler */
 body.dark-theme {
-  --bg-genre: #1C1C1C;
-  --text-genre: #B7B7B7;
-  --border-genre: #FFFFFF;
-  --border-bttm: #B7B7B7;
+  --bg-genre: #1c1c1c;
+  --text-genre: #b7b7b7;
+  --border-genre: #ffffff;
+  --border-bttm: #b7b7b7;
   --bg-body: #111111;
   --bg-hover: #2b2b2b;
-  --genre-active: #F87719;
+  --genre-active: #f87719;
   --shadow: 0 0 20px rgba(255, 165, 0, 0.4);
   --empty-title: #ffffff;
 }
@@ -248,7 +248,7 @@ body {
 }
 
 /* Search butonu */
-.search-btn {
+.library-search-btn {
   margin: 30px auto;
   display: block;
   padding: 12px 28px;
@@ -263,7 +263,7 @@ body {
 }
 
 /* Search hover */
-.search-btn:hover {
+.library-search-btn:hover {
   transform: scale(1.04);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
 }

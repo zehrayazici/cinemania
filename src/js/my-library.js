@@ -15,6 +15,8 @@ const genreText = document.getElementById('genreText');
 const loaderBox = document.querySelector('.library-loader');
 const errorBox = document.querySelector('.library-error');
 
+if (!document.querySelector('.library-section')) return;
+
 /* ======================================================
    PAGINATION & STATE
    Sayfa başına film sayısı ve uygulama state'leri
@@ -104,9 +106,9 @@ function createMovieCard(movie) {
   return `
     <li class="movie-card" data-id="${movie.id}">
       <div class="card-poster">
-        <img 
-          src="https://image.tmdb.org/t/p/w500${movie.poster_path}" 
-          alt="${movie.title}" 
+        <img
+          src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+          alt="${movie.title}"
         />
 
         <div class="card-overlay">
