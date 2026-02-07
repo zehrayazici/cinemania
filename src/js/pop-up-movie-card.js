@@ -60,9 +60,17 @@ async function openMoviePopup(movieId) {
     }
 
     if (infoValues.length >= 3) {
-      infoValues[0].textContent = movie.vote_average
-        ? `${movie.vote_average} / ${movie.vote_count}`
-        : 'N/A';
+      if (movie.vote_average) {
+        const voteAvg = movie.vote_average.toFixed(1);
+        const voteCount = movie.vote_count ?? 0;
+        infoValues[0].innerHTML = `
+          <span class="popup-pill">${voteAvg}</span>
+          <span class="popup-pill-sep">/</span>
+          <span class="popup-pill">${voteCount}</span>
+        `;
+      } else {
+        infoValues[0].textContent = 'N/A';
+      }
 
       infoValues[1].textContent = movie.popularity
         ? movie.popularity.toFixed(1)
@@ -78,9 +86,11 @@ async function openMoviePopup(movieId) {
     }
 
     if (libraryBtn) {
-      libraryBtn.textContent = isInLibrary(movie.id)
-        ? 'Remove from My Library'
-        : 'Add to My Library';
+      const inLibrary = isInLibrary(movie.id);
+      libraryBtn.textContent = inLibrary
+        ? 'Remove from my library'
+        : 'Add to my library';
+      libraryBtn.classList.toggle('is-remove', inLibrary);
 
       libraryBtn.onclick = () => toggleLibrary(movie);
     }
@@ -110,10 +120,12 @@ function toggleLibrary(movie) {
 
   if (isInLibrary(movie.id)) {
     library = library.filter(item => item.id !== movie.id);
-    libraryBtn.textContent = 'Add to My Library';
+    libraryBtn.textContent = 'Add to my library';
+    libraryBtn.classList.remove('is-remove');
   } else {
     library.push(movie);
-    libraryBtn.textContent = 'Remove from My Library';
+    libraryBtn.textContent = 'Remove from my library';
+    libraryBtn.classList.add('is-remove');
   }
 
   localStorage.setItem(LIBRARY_KEY, JSON.stringify(library));
