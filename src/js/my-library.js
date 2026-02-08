@@ -15,8 +15,6 @@ const genreText = document.getElementById('genreText');
 const loaderBox = document.querySelector('.library-loader');
 const errorBox = document.querySelector('.library-error');
 
-if (!document.querySelector('.library-section')) return;
-
 /* ======================================================
    PAGINATION & STATE
    Sayfa başına film sayısı ve uygulama state'leri
@@ -372,6 +370,7 @@ function hideLoader() {
 ====================================================== */
 
 export function initMyLibrary() {
+  if (!document.querySelector('.library-section')) return;
   initLibrary();
 }
 
