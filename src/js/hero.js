@@ -1,6 +1,7 @@
 import { API_KEY, BASE_URL } from './api/movies-api.js';
 import { createLoader } from './loader.js';
 import { getDailyTrending } from './api/movies-api.js';
+import { openMoviePopup } from './pop-up-movie-card.js';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/original';
 
 // Yardımcı fonksiyon: Elementin varlığını kontrol eder
@@ -45,10 +46,15 @@ function displayMovie(movie) {
 
   if (detailsBtn) {
     detailsBtn.onclick = () => {
-      if (typeof openMoreDetailsModal === 'function') {
-        openMoreDetailsModal(movie.id);
+      if (typeof openMoviePopup === 'function') {
+        openMoviePopup(movie.id);
+      } else if (
+        typeof window !== 'undefined' &&
+        typeof window.openMoviePopup === 'function'
+      ) {
+        window.openMoviePopup(movie.id);
       } else {
-        console.log('Detaylar modalı henüz hazır değil.');
+        console.log('Details modal is not ready.');
       }
     };
   }
