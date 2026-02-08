@@ -1,0 +1,77 @@
+/* Ana konteyner: Body stillerini buraya çektik */
+
+.weekly-trends {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    padding: 20px 0;
+    text-transform: uppercase;  
+}
+
+.weekly-trends__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.weekly-trends__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weekly-trends__title {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.weekly-trends__see-all {
+    color: #ff6b00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Grid Sistemi - İsim güncellendi */
+.weekly-trends__grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 768px) {
+    .weekly-trends__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .weekly-trends__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Kart Tasarımları - Diğer stillerle karışmaması için başına .weekly-trends ekledik */
+.weekly-trends .movie-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.weekly-trends .movie-card img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+
+.weekly-trends .stars {
+    color: #ff6b00;
+    margin-top: 5px;
+}
