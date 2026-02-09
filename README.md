@@ -52,76 +52,31 @@
 <hr />
 
 <h2 id="api-integration">🎞️ API Integration</h2>
-<p>
-  Cinemania uses <strong>The Movie Database (TMDB)</strong> API as its primary data source.
-</p>
-
 <ul>
-  <li>🔑 API Provider: <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">themoviedb.org</a></li>
-  <li>📚 Documentation: <a href="https://developer.themoviedb.org/docs" target="_blank" rel="noopener">TMDB Docs</a></li>
-</ul>
-
-<p><strong>Used Endpoints:</strong></p>
-<ul>
-  <li>Trending Movies (Daily & Weekly)</li>
-  <li>Upcoming Movies</li>
-  <li>Search Movies (by keyword & year)</li>
-  <li>Movie Details</li>
-  <li>Movie Videos (Trailers)</li>
-  <li>Genres List</li>
+  <li>API Provider: <a href="https://www.themoviedb.org/" target="_blank">TMDB</a></li>
+  <li>Documentation: <a href="https://developer.themoviedb.org/docs" target="_blank">TMDB Docs</a></li>
 </ul>
 
 <hr />
 
 <h2 id="core-features">✨ Core Features (MVP)</h2>
-
-<h3>Responsive Layout 📱💻🖥️</h3>
 <ul>
-  <li><strong>Mobile:</strong> 320px+</li>
-  <li><strong>Tablet:</strong> 768px+</li>
-  <li><strong>Desktop:</strong> 1280px+</li>
-</ul>
-
-<h3>Header & Navigation</h3>
-<ul>
-  <li>Logo and navigation links (Home, Catalog, My Library)</li>
-  <li>Mobile slide-in menu</li>
-  <li>Theme switcher (Dark / Light)</li>
-</ul>
-
-<h3>Hero Section</h3>
-<ul>
-  <li>Random trending movie of the day</li>
-  <li>Fallback hero when no data is available</li>
-  <li>Buttons: <em>More Details</em> & <em>Watch Trailer</em></li>
-</ul>
-
-<h3>Movie Modal</h3>
-<ul>
-  <li>Poster, title, rating, popularity</li>
-  <li>Scrollable description area</li>
-  <li>Add / Remove from My Library</li>
-  <li>Close via overlay, ESC, or close button</li>
-</ul>
-
-<h3>Footer</h3>
-<ul>
-  <li>Copyright information</li>
-  <li>Project year</li>
-  <li><strong>GoIT Students</strong> link opening a team modal</li>
-  <li>Responsive team modal for all breakpoints</li>
+  <li>Mobile-first responsive layout (320px / 768px / 1280px)</li>
+  <li>Theme switcher (Dark / Light) with localStorage persistence</li>
+  <li>Hero section with daily trending movie</li>
+  <li>Movie detail modal with trailer support</li>
+  <li>My Library with add/remove logic (localStorage)</li>
+  <li>Footer with team modal (GoIT Students)</li>
 </ul>
 
 <hr />
 
 <h2 id="additional-features">🚀 Additional Features</h2>
 <ul>
-  <li>Weekly Trends section</li>
-  <li>Upcoming This Month feature</li>
-  <li>Catalog page with server-side pagination</li>
-  <li>Year-based movie filtering</li>
-  <li>My Library with LocalStorage persistence</li>
-  <li>Load More button</li>
+  <li>Weekly Trends & Upcoming This Month sections</li>
+  <li>Catalog search with year filter</li>
+  <li>Server-side pagination</li>
+  <li>Load more functionality</li>
   <li>Scroll-to-top button</li>
   <li>Global loader (spinner) for async requests</li>
 </ul>
@@ -130,16 +85,14 @@
 
 <h2 id="technical-requirements">⚙️ Technical Requirements</h2>
 <ul>
-  <li>Semantic HTML5 structure</li>
+  <li>Semantic HTML5</li>
   <li>Modern-normalize integrated</li>
-  <li>Fonts added via <code>@font-face</code></li>
-  <li>Optimized images for Retina displays</li>
-  <li>All static assets located under <code>src/images</code></li>
-  <li>Favicon included</li>
-  <li>No console errors or logs</li>
-  <li>Passed HTML & CSS validation</li>
+  <li>Fonts via <code>@font-face</code></li>
+  <li>Optimized retina-ready images</li>
+  <li>All static assets under <code>src/images</code></li>
+  <li>Passed W3C HTML & CSS validation</li>
   <li>PageSpeed score ≥ 80%</li>
-  <li>Consistent naming conventions</li>
+  <li>No console errors</li>
   <li>Published on GitHub Pages</li>
 </ul>
 
@@ -151,30 +104,38 @@ src/
  ├── css/
  ├── js/
  ├── images/
- │   └── footer/
+ │   ├── footer/
+ │   └── readme/
  ├── partials/
  ├── index.html
+ ├── my-library.html
+ └── main.js
 </pre>
 
 <hr />
 
 <h2 id="technologies-used">🛠️ Technologies Used</h2>
 <ul>
-  <li><strong>HTML5</strong></li>
-  <li><strong>CSS3</strong> (Flexbox & Grid)</li>
-  <li><strong>Vanilla JavaScript (ES6+)</strong></li>
-  <li><strong>Vite</strong></li>
-  <li><strong>Git & GitHub</strong></li>
-  <li><strong>TMDB API</strong></li>
+  <li>HTML5</li>
+  <li>CSS3 (Flexbox & Grid)</li>
+  <li>Vanilla JavaScript (ES6+)</li>
+  <li>Vite</li>
+  <li>Git & GitHub</li>
+  <li>TMDB API</li>
 </ul>
 
 <hr />
 
 <h2 id="team-members">👥 Team Members & Responsibilities</h2>
-
 <ul>
-  <li><strong>Çiğdem Ergal</strong> — Team Lead — Header & Leadership</li>
-  <li><strong>Halenur Gürel</strong> — Scrum Master — Hero & Scrum Management</li>
+  <li><strong>Çiğdem Ergal</strong> — Team Lead — Header & Leadership —
+    <a href="https://github.com/CigdemErgal" target="_blank">GitHub</a> |
+    <a href="https://www.linkedin.com/in/%C3%A7i%C4%9Fdem-ergal/" target="_blank">LinkedIn</a>
+  </li>
+  <li><strong>Halenur Gürel</strong> — Scrum Master — Hero & Scrum —
+    <a href="https://github.com/halenurgurel" target="_blank">GitHub</a> |
+    <a href="https://www.linkedin.com/in/halenurgurel/" target="_blank">LinkedIn</a>
+  </li>
   <li><strong>Aslıhan Erdal</strong> — Upcoming This Month</li>
   <li><strong>Burak Gökay</strong> — Weekly Trends</li>
   <li><strong>Kerem Yıldırım</strong> — Catalog</li>
@@ -182,7 +143,10 @@ src/
   <li><strong>Nur Seda Ağgünlü</strong> — My Library</li>
   <li><strong>Ali Hamza Çakmak</strong> — Modals</li>
   <li><strong>Zehra Yazıcı</strong> — My Library Hero</li>
-  <li><strong>Kutluhan Gül</strong> — Footer & Team Modal</li>
+  <li><strong>Kutluhan Gül</strong> — Footer & Team Modal —
+    <a href="https://github.com/kutluhangil" target="_blank">GitHub</a> |
+    <a href="https://www.linkedin.com/in/kutluhangil/" target="_blank">LinkedIn</a>
+  </li>
 </ul>
 
 <hr />
@@ -191,16 +155,16 @@ src/
 
 <p><strong>Desktop Views</strong></p>
 <p>
-  <img src="./src/readme/desktop_home.png" width="30%" />
-  <img src="./src/readme/desktop_catalog.png" width="30%" />
-  <img src="./src/readme/desktop_library.png" width="30%" />
+  <img src="./src/images/readme/desktop_home.png" width="30%" />
+  <img src="./src/images/readme/desktop_catalog.png" width="30%" />
+  <img src="./src/images/readme/desktop_library.png" width="30%" />
 </p>
 
 <p><strong>Tablet & Mobile Views</strong></p>
 <p>
-  <img src="./src/readme/tablet_home.png" width="30%" />
-  <img src="./src/readme/mobile_home.png" width="30%" />
-  <img src="./src/readme/ui_kit.png" width="30%" />
+  <img src="./src/images/readme/tablet_home.png" width="30%" />
+  <img src="./src/images/readme/mobile_home.png" width="30%" />
+  <img src="./src/images/readme/ui_kit.png" width="30%" />
 </p>
 
 <hr />
