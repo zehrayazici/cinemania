@@ -1,30 +1,36 @@
 <footer class="footer">
-  <div class="footer-container container">
-    <p class="footer-text">
+  <div class="footer-container">
+    <p class="footer-desc">
       <span class="footer-text-line">&copy; 2023 | All Rights Reserved |</span>
-      <span class="footer-text-line">Developed with <span class="heart">♥</span> by <a href="#" class="footer-link">GoIT Students</a></span>
+      <span class="footer-text-line">Developed with <span class="heart">♥</span> by <a href="#" class="footer-link"
+          id="footer-link">GoIT Students</a></span>
     </p>
   </div>
-  
+
   <button class="scroll-to-top" aria-label="Scroll to top">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M18 15l-6-6-6 6"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6" />
     </svg>
-  </button>   <!-- Developer Team Modal -->
-    <div class="backdrop is-hidden" data-modal>
-      <div class="modal">
+  </button>
+
+  <!-- Developer Team Modal -->
+  <!-- Developer Team Modal -->
+  <div class="backdrop is-hidden" data-footer-modal>
+    <div class="modal">
+      <button type="button" class="modal-close-btn" data-footer-close>
+        <svg class="modal-close-icon" width="14" height="14" viewBox="0 0 14 14">
+          <path
+            d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" />
+        </svg>
+      </button>
+
+      <div class="modal-content">
         <h2 class="modal-title">CINEMANIA PROJECT TEAM</h2>
         <p class="modal-subtitle">The creative minds behind Cinemania</p>
-        <button type="button" class="modal-close-btn" data-modal-close>
-          <svg class="modal-close-icon" width="14" height="14" viewBox="0 0 14 14">
-            <path
-              d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" />
-          </svg>
-        </button>
-        <div class="team-list-container">
-          <ul class="team-list"></ul>
-        </div>
+        <ul class="team-list"></ul>
       </div>
     </div>
   </div>
+
 </footer>

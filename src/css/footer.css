@@ -27,23 +27,34 @@ body.dark-theme .footer {
   padding: 0;
 }
 
+.footer-container {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
 /* Responsive Padding - Inner spacing around text */
 /* Mobile (Default) */
 .footer-desc {
   padding: 40px 42px 28px 42px;
+  /* Top: 40px, Right: 42px, Bottom: 28px, Left: 42px */
 }
 
 /* Tablet */
 @media screen and (min-width: 768px) {
   .footer-desc {
     padding: 60px 143px 40px 143px;
+    /* Top: 60px, Right/Left: 143px, Bottom: 40px */
   }
 }
 
 /* Desktop */
 @media screen and (min-width: 1280px) {
   .footer-desc {
-    padding: 100px 300px 80px 300px;
+    padding: 100px 399px 80px 399px;
+    /* Top: 100px, Right/Left: 399px, Bottom: 80px */
   }
 }
 
@@ -76,19 +87,25 @@ body.dark-theme .footer {
   color: var(--footer-accent-color);
 }
 
-/* Modal Styles */
-.backdrop {
+
+/* --- Developer Team Modal Styles --- */
+
+.backdrop[data-footer-modal] {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   z-index: 1000;
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .backdrop.is-hidden {
@@ -98,214 +115,228 @@ body.dark-theme .footer {
 }
 
 .modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  width: 95%;
-  max-width: 1100px;
-  max-height: 90vh;
-  background-color: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
-    0px 2px 1px rgba(0, 0, 0, 0.2);
-  padding: 40px 20px;
-  overflow-y: auto;
-  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-body.dark-theme .modal {
+  position: relative;
   background-color: #111111;
-  box-shadow: 0 0 20px #F87719;
-  /* Orange glow in dark mode */
+  /* Dark background as requested */
+  color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  width: 90vw !important;
+  max-width: 1400px !important;
+  box-shadow: 0 0 30px rgba(248, 119, 25, 0.3);
+  /* Soft orange glow */
+  border: 1px solid #333;
 }
 
-/* Modal Header */
+.footer .modal .modal-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
 .modal-title {
   text-align: center;
-  font-size: 24px;
+  font-size: 32px;
+  /* Larger title */
   font-weight: 700;
-  color: var(--footer-accent-color);
-  margin-bottom: 5px;
+  color: #ffffff;
+  margin: 0 0 10px 0;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .modal-subtitle {
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
+  /* Larger subtitle */
+  color: var(--footer-accent-color);
+  margin: 0 0 30px 0;
   font-weight: 400;
-  color: #555555;
-  margin-bottom: 30px;
 }
 
-body.dark-theme .modal-subtitle {
-  color: #b7b7b7;
-}
-
-
-
-.backdrop.is-hidden .modal {
-  transform: translate(-50%, -50%) scale(0.9);
-}
-
+/* Close Button */
 .modal-close-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  top: 20px;
+  right: 20px;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.3s ease, fill 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+  z-index: 10;
 }
 
-body.dark-theme .modal-close-btn {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.modal-close-btn:hover,
-.modal-close-btn:focus {
-  border-color: var(--footer-accent-color);
+.modal-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .modal-close-icon {
-  fill: #000000;
-  transition: fill 0.3s ease;
-}
-
-body.dark-theme .modal-close-icon {
   fill: #ffffff;
+  transition: fill 0.3s;
 }
 
-.modal-close-btn:hover .modal-close-icon,
-.modal-close-btn:focus .modal-close-icon {
+.modal-close-btn:hover .modal-close-icon {
   fill: var(--footer-accent-color);
 }
 
-/* Team List Grid Layout */
+/* Team Grid - 5 columns for desktop */
 .team-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  /* Mobile: 2 cols */
+  gap: 15px;
   list-style: none;
   padding: 0;
   margin: 0;
-  justify-items: center;
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
   .team-list {
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .team-list {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media screen and (min-width: 1280px) {
   .team-list {
     grid-template-columns: repeat(5, 1fr);
+    /* Desktop: 5 cols */
+    gap: 20px;
   }
 }
 
+/* Team Card - Small items */
+/* Team Card - Small items */
 .team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
   width: 100%;
   max-width: 200px;
-  text-align: center;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-radius: 8px;
-  padding: 10px;
-}
-
-.team-card:hover {
-  transform: scale(1.05) translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.05);
-  /* Subtle highlight */
-}
-
-body.dark-theme .team-card:hover {
-  box-shadow: 0 15px 30px rgba(248, 119, 25, 0.2);
-  /* Orange glow on hover */
-  background-color: rgba(255, 255, 255, 0.02);
+  margin: 0 auto;
 }
 
 .team-image {
   width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  object-fit: cover;
+  max-width: 160px;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  background-color: #222;
+
+  /* Premium Motion Quality */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow, filter;
+}
+
+/* Premium Hover Effect - Desktop Only */
+/* Premium Hover Effect - Desktop Only */
+@media (hover: hover) {
+  .team-card:hover .team-image {
+    /* Image Motion: Slight scale up & subtle upward movement */
+    transform: scale(1.05) translateY(-5px);
+
+    /* Depth & Light: Diffuse, low contrast, slightly glowing shadow */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
+      0 10px 20px rgba(248, 119, 25, 0.2);
+
+    /* Image Treatment: Slight brightness & contrast boost */
+    filter: brightness(1.08) contrast(1.05) saturate(1.05);
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+  z-index: 10000;
+  pointer-events: auto !important;
+  visibility: visible !important;
 }
 
 .team-name {
-  font-weight: 700;
   font-size: 16px;
-  margin-bottom: 5px;
-  color: #242424;
-}
-
-body.dark-theme .team-name {
-  color: #f4f4f4;
+  /* Smaller name */
+  font-weight: 700;
+  margin: 5px 0 2px 0;
+  color: #ffffff;
+  line-height: 1.2;
 }
 
 .team-role {
-  font-size: 14px;
+  font-size: 13px;
+  /* Smaller role */
   color: var(--footer-accent-color);
-  margin-bottom: 10px;
   text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
 }
 
+/* Social Icons */
 .social-links {
   display: flex;
+  gap: 15px;
   justify-content: center;
-  gap: 10px;
-  list-style: none;
-  padding: 0;
 }
 
 .social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  color: #000000;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0.8;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 100;
+  cursor: pointer;
 }
 
-body.dark-theme .social-link {
-  color: #ffffff;
+.social-link:hover {
+  transform: scale(1.1);
+  opacity: 1;
 }
 
-.social-link:hover,
-.social-link:focus {
-  color: var(--footer-accent-color);
+.social-icon-svg {
+  width: 22px;
+  height: 22px;
+  fill: #ffffff;
+  /* White icons on dark bg */
+  transition: fill 0.3s;
 }
 
-/* Social Icons with Masking */
-.social-mask-icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-  background-color: #000000;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  transition: background-color 0.3s ease;
-}
-
-body.dark-theme .social-mask-icon {
-  background-color: #ffffff;
+.social-link:hover .social-icon-svg {
+  fill: var(--footer-accent-color);
 }
 
 /* Scroll to top button */
@@ -316,7 +347,8 @@ body.dark-theme .social-mask-icon {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: #ff6b08; /* Theme accent color */
+  background-color: #ff6b08;
+  /* Theme accent color */
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -336,7 +368,8 @@ body.dark-theme .social-mask-icon {
 }
 
 .scroll-to-top:hover {
-  background-color: #e65a00; /* Darker shade for hover */
+  background-color: #e65a00;
+  /* Darker shade for hover */
   transform: translateY(-2px);
 }
 
