@@ -77,30 +77,29 @@ function normalizeMovie(movie) {
 ====================================================== */
 
 function createStarsSVG(rating) {
-  const starFilledUrl = new URL(
-    '../public/assets/star-icon-filled.svg',
-    import.meta.url
-  ).href;
-  const starEmptyUrl = new URL(
-    '../public/assets/star-icon.svg',
-    import.meta.url
-  ).href;
+  const value = Number(rating);
+  if (!Number.isFinite(value)) return '';
 
-  const score = Number(rating) / 2;
-  const full = Math.round(score);
-  const empty = 5 - full;
+  const starCount = value / 2;
+  const fullStars = Math.floor(starCount);
+  const hasHalfStar = starCount % 1 >= 0.3;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-  let stars = '';
+  let starsHTML = '';
 
-  for (let i = 0; i < full; i++) {
-    stars += `<img class="star" src="${starFilledUrl}" alt="star" />`;
+  for (let i = 0; i < fullStars; i++) {
+    starsHTML += '<span class="star-item star-filled"></span>';
   }
 
-  for (let i = 0; i < empty; i++) {
-    stars += `<img class="star" src="${starEmptyUrl}" alt="star" />`;
+  if (hasHalfStar) {
+    starsHTML += '<span class="star-item star-half"></span>';
   }
 
-  return stars;
+  for (let i = 0; i < emptyStars; i++) {
+    starsHTML += '<span class="star-item star-empty"></span>';
+  }
+
+  return starsHTML;
 }
 
 /* ======================================================

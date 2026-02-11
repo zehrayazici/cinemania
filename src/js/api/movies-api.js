@@ -16,6 +16,15 @@ export async function getWeeklyTrending() {
   }
 }
 
+// tür listesini çeker
+export async function getMovieGenres() {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
+  );
+  const data = await response.json();
+  return data.genres; // [{id: 28, name: "Action"}, ...] şeklinde döner
+}
+
 /**
  * Film adına göre arama yapar (Katalog sayfası için).
  * @param {string} query - Aranan film adı
