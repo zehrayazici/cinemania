@@ -186,10 +186,28 @@ body {
 }
 
 /* Yıldız ikonları */
-.movie-rating img {
+.movie-rating .star-item {
   width: 14px;
   height: 14px;
-  object-fit: contain;
+  display: inline-block;
+  position: relative;
+  background: url('../img/star-icon.svg') no-repeat center / contain;
+}
+
+.movie-rating .star-filled {
+  background: url('../img/star-icon-filled.svg') no-repeat center / contain;
+}
+
+.movie-rating .star-empty {
+  background: url('../img/star-icon.svg') no-repeat center / contain;
+}
+
+.movie-rating .star-half::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../img/star-icon-filled.svg') no-repeat center / contain;
+  clip-path: inset(0 50% 0 0);
 }
 
 /* ================= BOTTOM ROW ================= */
@@ -261,6 +279,10 @@ body {
   font-size: 12px;
   font-weight: 500;
   line-height: 1;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -396,7 +418,7 @@ body {
     font-size: 10px;
   }
 
-  .movie-rating img {
+  .movie-rating .star-item {
     width: 10px;
     height: 10px;
   }
@@ -437,7 +459,7 @@ body {
     overflow: hidden;
   }
 
-  .movie-rating img {
+  .movie-rating .star-item {
     width: 18px;
     height: 18px;
   }

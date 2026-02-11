@@ -1,12 +1,22 @@
-import { getWeeklyTrending } from './api/movies-api.js';
+import { getWeeklyTrending, getMovieGenres } from './api/movies-api.js';
 
 const movieGrid = document.getElementById('movie-grid');
 
 let cachedMovies = [];
+let genreMap = {}; // Tür ID'lerini isimlere dönüştürmek için sözlük
 
 function getVisibleCount() {
-  // Mobil: 1, Tablet+Desktop: 3
   return window.matchMedia('(min-width: 768px)').matches ? 3 : 1;
+}
+
+// Tür ID'lerinden metin oluşturan yardımcı fonksiyon
+function getGenreNames(genreIds) {
+  if (!genreIds || genreIds.length === 0) return 'Other';
+
+  return genreIds
+    .slice(0, 2) // Tasarımı bozmamak için en fazla 2 tür gösteriyoruz
+    .map(id => genreMap[id] || 'Other')
+    .join(', ');
 }
 
 function renderMovies() {
@@ -19,13 +29,21 @@ export async function initWeeklyTrends() {
   if (!movieGrid) return;
 
   try {
-    // API'den trend filmleri çekiyoruz
-    cachedMovies = await getWeeklyTrending();
+    // Türleri ve Trendleri aynı anda çekiyoruz
+    const [genres, movies] = await Promise.all([
+      getMovieGenres(),
+      getWeeklyTrending(),
+    ]);
+
+    // Türleri hızlıca bulabilmek için map'liyoruz: { 28: "Action", 12: "Adventure" }
+    genres.forEach(genre => {
+      genreMap[genre.id] = genre.name;
+    });
+
+    cachedMovies = movies;
 
     if (cachedMovies && cachedMovies.length > 0) {
       renderMovies();
-
-      // Ekran boyutu değişirse (resize/orientation change) yeniden çiz
       window.addEventListener('resize', renderMovies);
     }
   } catch (error) {
@@ -36,13 +54,12 @@ export async function initWeeklyTrends() {
 function displayMovies(movies) {
   movieGrid.innerHTML = movies
     .map(movie => {
-      // Film çıkış yılı bilgisini alıyoruz (Yoksa varsayılan 2023 yazıyoruz)
       const releaseYear = movie.release_date
         ? movie.release_date.split('-')[0]
         : '2023';
 
-      // Önemli: CSS'deki .weekly-trends__info yapısına uygun HTML
       const stars = renderStars(movie.vote_average);
+      const genreNames = getGenreNames(movie.genre_ids);
 
       return `
         <div class="weekly-trends__item" data-movie-id="${movie.id}">
@@ -52,7 +69,7 @@ function displayMovies(movies) {
                 <div class="weekly-trends__info">
                     <div class="weekly-trends__text">
                         <div class="weekly-trends__movie-title">${movie.title}</div>
-                        <div class="weekly-trends__movie-meta">Drama, Action | ${releaseYear}</div>
+                        <div class="weekly-trends__movie-meta">${genreNames} | ${releaseYear}</div>
                     </div>
                     <div class="weekly-trends__stars" aria-label="Rating ${movie.vote_average?.toFixed ? movie.vote_average.toFixed(1) : 'N/A'}">${stars}</div>
                 </div>
@@ -73,15 +90,12 @@ function renderStars(rating) {
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   let starsHTML = '';
-
   for (let i = 0; i < fullStars; i++) {
     starsHTML += '<span class="star-item star-filled"></span>';
   }
-
   if (hasHalfStar) {
     starsHTML += '<span class="star-item star-half"></span>';
   }
-
   for (let i = 0; i < emptyStars; i++) {
     starsHTML += '<span class="star-item star-empty"></span>';
   }
@@ -89,7 +103,6 @@ function renderStars(rating) {
   return starsHTML;
 }
 
-// Sayfa yüklendiğinde fonksiyonu çalıştır
 initWeeklyTrends();
 
 if (movieGrid) {
@@ -104,14 +117,10 @@ if (movieGrid) {
 
 function openPopupSafe(movieId) {
   if (!movieId) return false;
-
   if (typeof window.openMoviePopup === 'function') {
     window.openMoviePopup(movieId);
     return true;
   }
-
-  console.warn(
-    'openMoviePopup bulunamadı. Popup modülü sayfaya yüklenmemiş olabilir.'
-  );
+  console.warn('openMoviePopup bulunamadı.');
   return false;
 }
