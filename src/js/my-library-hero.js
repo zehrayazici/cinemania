@@ -4,7 +4,8 @@ import { renderMoviePopup } from './pop-up-movie-card.js';
 import { renderTrailerPopup as externalRenderTrailer } from './pop-up-trailer-card.js';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
-const FALLBACK_IMAGE = '../img/library-hero-image.jpg';
+const FALLBACK_IMAGE = new URL('../img/library-hero-image.jpg', import.meta.url)
+  .href;
 
 // Loader
 const myLibraryHeroLoader = document.querySelector('.my-library-hero__loader');

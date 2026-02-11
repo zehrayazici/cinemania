@@ -3,6 +3,10 @@ import { createLoader } from './loader.js';
 import { getDailyTrending } from './api/movies-api.js';
 import { openMoviePopup } from './pop-up-movie-card.js';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/original';
+const DEFAULT_COVER_URL = new URL(
+  '../public/assets/default-cover.png',
+  import.meta.url
+).href;
 
 // Yardımcı fonksiyon: Elementin varlığını kontrol eder
 const getEl = id => document.getElementById(id);
@@ -179,7 +183,7 @@ function displayDefaultHero() {
 
   if (heroSection) {
     heroSection.classList.add('hero-default');
-    heroSection.style.backgroundImage = 'url(/src/assets/default-cover.png)';
+    heroSection.style.backgroundImage = `url(${DEFAULT_COVER_URL})`;
   }
 
   if (title) title.innerText = "Let's Make Your Own Cinema";
@@ -195,7 +199,7 @@ function displayDefaultHero() {
 
   if (buttonsContainer) {
     buttonsContainer.innerHTML =
-      '<a class="btn btn-orange" href="/catalog.html">Get Started</a>';
+      '<a class="btn btn-orange" href="./catalog.html">Get Started</a>';
   }
 }
 
