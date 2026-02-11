@@ -162,6 +162,10 @@ body.light-theme .year-dropdown li:hover {
 }
 
 .header-mobile-title {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 12px;

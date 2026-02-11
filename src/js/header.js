@@ -41,15 +41,21 @@ function initThemeToggle() {
 }
 
 function initMobileMenu() {
-  const burgerBtn = document.querySelector('.burger-btn');
+  const menuTrigger = document.querySelector('.header-mobile-title');
   const menuOverlay = document.querySelector('[data-menu]');
 
-  if (!burgerBtn || !menuOverlay) return;
+  if (!menuTrigger || !menuOverlay) return;
 
-  const openMenu = () => menuOverlay.classList.remove('is-hidden');
-  const closeMenu = () => menuOverlay.classList.add('is-hidden');
+  const openMenu = () => {
+    menuOverlay.classList.remove('is-hidden');
+    menuTrigger.setAttribute('aria-expanded', 'true');
+  };
+  const closeMenu = () => {
+    menuOverlay.classList.add('is-hidden');
+    menuTrigger.setAttribute('aria-expanded', 'false');
+  };
 
-  burgerBtn.addEventListener('click', (e) => {
+  menuTrigger.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
 
