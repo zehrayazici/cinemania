@@ -18,7 +18,7 @@ const developers = [
     {
         name: 'Ali Hamza Çakmak',
         role: 'Developer',
-        image: new URL('../images/footer/ali.webp', import.meta.url).href,
+        image: null,
         github: 'https://github.com/MRMARUL',
         linkedin: 'https://www.linkedin.com/in/ali-hamza-%C3%A7akmak-8112553a8/',
     },
